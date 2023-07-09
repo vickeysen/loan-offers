@@ -33,12 +33,12 @@ class Logger extends BaseConfig
      *
      *     array(1, 2, 3, 8) = Emergency, Alert, Critical, and Debug messages
      *
-     * For a live site you'll usually enable Critical or higher (3) to be logged otherwise
-     * your log files will fill up very fast.
+     * For a live site, you'll usually enable Critical or higher (3) to be logged.
+     * Otherwise, your log files will fill up very fast.
      *
      * @var array|int
      */
-    public $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
+    public $threshold = 4;
 
     /**
      * --------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class Logger extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Each item that is logged has an associated date. You can use PHP date
-     * codes to set your own date formatting
+     * codes to set your own date formatting.
      */
     public string $dateFormat = 'Y-m-d H:i:s';
 
@@ -58,7 +58,7 @@ class Logger extends BaseConfig
      * The logging system supports multiple actions to be taken when something
      * is logged. This is done by allowing for multiple Handlers, special classes
      * designed to write the log to their chosen destinations, whether that is
-     * a file on the getServer, a cloud-based service, or even taking actions such
+     * a file on the server, a cloud-based service, or even taking actions such
      * as emailing the dev team.
      *
      * Each handler is defined by the class name used for that handler, and it
@@ -74,14 +74,7 @@ class Logger extends BaseConfig
      * the handler on top and continuing down.
      */
     public array $handlers = [
-
-        /*
-         * --------------------------------------------------------------------
-         * File Handler
-         * --------------------------------------------------------------------
-         */
         FileHandler::class => [
-
             // The log levels that this handler will handle.
             'handles' => [
                 'critical',
@@ -94,57 +87,20 @@ class Logger extends BaseConfig
                 'warning',
             ],
 
-            /*
-             * The default filename extension for log files.
-             * An extension of 'php' allows for protecting the log files via basic
-             * scripting, when they are to be stored under a publicly accessible directory.
-             *
-             * Note: Leaving it blank will default to 'log'.
-             */
+            // The default filename extension for log files.
+            // An extension of 'php' allows for protecting the log files via basic
+            // scripting, when they are to be stored under a publicly accessible directory.
             'fileExtension' => '',
 
-            /*
-             * The file system permissions to be applied on newly created log files.
-             *
-             * IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
-             * integer notation (i.e. 0700, 0644, etc.)
-             */
+            // The file system permissions to be applied to newly created log files.
+            // IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
+            // integer notation (e.g., 0700, 0644, etc.)
             'filePermissions' => 0644,
 
-            /*
-             * Logging Directory Path
-             *
-             * By default, logs are written to WRITEPATH . 'logs/'
-             * Specify a different destination here, if desired.
-             */
-            'path' => '',
+            // Logging Directory Path
+            // By default, logs are written to WRITEPATH . 'logs/'
+            // Specify a different destination here if desired.
+            'path' => WRITEPATH . 'logs/',
         ],
-
-        /*
-         * The ChromeLoggerHandler requires the use of the Chrome web browser
-         * and the ChromeLogger extension. Uncomment this block to use it.
-         */
-        // 'CodeIgniter\Log\Handlers\ChromeLoggerHandler' => [
-        //     /*
-        //      * The log levels that this handler will handle.
-        //      */
-        //     'handles' => ['critical', 'alert', 'emergency', 'debug',
-        //                   'error', 'info', 'notice', 'warning'],
-        // ],
-
-        /*
-         * The ErrorlogHandler writes the logs to PHP's native `error_log()` function.
-         * Uncomment this block to use it.
-         */
-        // 'CodeIgniter\Log\Handlers\ErrorlogHandler' => [
-        //     /* The log levels this handler can handle. */
-        //     'handles' => ['critical', 'alert', 'emergency', 'debug', 'error', 'info', 'notice', 'warning'],
-        //
-        //     /*
-        //     * The message type where the error should go. Can be 0 or 4, or use the
-        //     * class constants: `ErrorlogHandler::TYPE_OS` (0) or `ErrorlogHandler::TYPE_SAPI` (4)
-        //     */
-        //     'messageType' => 0,
-        // ],
     ];
 }

@@ -24,12 +24,14 @@ class Database extends Config
     /**
      * The default database connection.
      */
+    public $queryLog = true;
+
     public array $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
-        'username' => '',
+        'username' => 'root',
         'password' => '',
-        'database' => '',
+        'database' => 'loan',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
